@@ -222,3 +222,76 @@ data[(data['Weather Condition'].str.contains('Clear')) & (data['Rel Hum_%'] > 50
 ---
 ![15](https://github.com/indrabayusegara/Data-Analysis--Weather-Data-/assets/75928437/2da03352-0dbf-4f43-9652-69f803f7b41a)
 ---
+
+## 16. Perform visualization of the processed data.
+```
+import matplotlib.pyplot as plt
+```
+> 1. Weather Top 5 Condition Distribution (Bar Chart)
+```
+bc = data['Weather Condition'].value_counts()
+data_chart = bc.head(5)
+
+plt.figure(figsize=(10,7))
+plt.bar(data_chart.index, data_chart.values, width=0.5)
+plt.title('Weather Top 5 Condition Distribution')
+plt.xlabel('Weather Condition')
+plt.ylabel('Values')
+plt.xticks(rotation=45)  # Rotate label agar lebih mudah dibaca
+plt.show()
+```
+---
+![Top 5 Bar chart](https://github.com/indrabayusegara/Data-Analysis--Weather-Data-/assets/75928437/f8227ada-daed-474f-9b97-de3884c39871)
+---
+
+> 2.  Weather Top 5 Condition Distribution (Line Chart)
+```
+plt.figure(figsize=(10,7))
+plt.plot(data_chart.index, data_chart.values, marker='o')
+plt.title('Weather Top 5 Condition Distribution')
+plt.xlabel('Weather Condition')
+plt.ylabel('Values')
+plt.xticks(rotation=45)  # Rotate label agar lebih mudah dibaca
+plt.show()
+```
+---
+![Top 5 line Chart](https://github.com/indrabayusegara/Data-Analysis--Weather-Data-/assets/75928437/7adbef5d-4884-4737-934f-e79e41ecd609)
+---
+
+> 3. Weather Top 5 Condition Distribution (Donut Chart)
+```
+# Menghitung persentase dari setiap nilai dalam data_chart
+percentages = data_chart / data_chart.sum() * 100
+
+# Membuat donut chart
+plt.figure(figsize=(10, 7))
+plt.pie(percentages, labels=data_chart.index, autopct='%1.1f%%', startangle=140, wedgeprops=dict(width=0.4, edgecolor='w'))
+
+# Menambahkan lingkaran di tengah untuk membuatnya menjadi donut chart
+centre_circle = plt.Circle((0,0),0.30,fc='white')
+fig = plt.gcf()
+fig.gca().add_artist(centre_circle)
+
+# Mengatur aspek ratio agar pie chart berbentuk lingkaran
+plt.axis('equal')
+
+plt.title('Weather Top 5 Condition Distribution')
+plt.show()
+```
+---
+![Top 5 donut chart](https://github.com/indrabayusegara/Data-Analysis--Weather-Data-/assets/75928437/6fd34820-a99d-4a2b-b4af-b197949d6bb8)
+---
+
+> 4. Weather Bottom 5 Condition Distribution (Bar Chart)
+```
+plt.figure(figsize=(10,7))
+plt.bar(data_chart2.index, data_chart2.values, width=0.5)
+plt.title('Weather Bottom 5 Condition Distribution')
+plt.xlabel('Weather Condition')
+plt.ylabel('Values')
+plt.xticks(rotation=45)  # Rotate label agar lebih mudah dibaca
+plt.show()
+```
+---
+![Bottom 5 Bar chart](https://github.com/indrabayusegara/Data-Analysis--Weather-Data-/assets/75928437/142e0050-2b13-47f1-bbbe-e2c4e93d5aeb)
+---
